@@ -1,0 +1,25 @@
+<div *ngIf="!connected" class="login-form">
+  <h2>Connexion au chat</h2>
+  <input type="text" [(ngModel)]="username" placeholder="Votre nom">
+  <select [(ngModel)]="role">
+    <option value="client">Client</option>
+    <option value="agent">Agent</option>
+  </select>
+  <button (click)="connect()">Se connecter</button>
+</div>
+
+<div *ngIf="connected" class="chat-container">
+  <div class="messages">
+    <div *ngFor="let msg of messages">
+      <strong>{{ msg.sender }}</strong> : {{ msg.content }}
+      <small class="timestamp">[{{ msg.timestamp | date:'shortTime' }}]</small>
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input type="text" [(ngModel)]="messageContent" placeholder="Message..." (keydown.enter)="sendMessage()">
+    <button (click)="sendMessage()">Envoyer</button>
+  </div>
+</div>
+
+
